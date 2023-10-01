@@ -1,0 +1,23 @@
+{% set totalAuthors = 0 %}
+{% set totalBooks = 0 %}
+
+{% if authors is defined and authors|length > 0 %}
+    {% for a in authors %}
+        {{ a.username|upper }}
+        {% if a.nb_books > 0 %}
+            <p>Books: {{a.nb_books}}</p>
+            <img src="{{ a.picture }}" alt="">
+            <input type="submit" value="buy">
+            {% set totalBooks = totalBooks + a.nb_books %}
+        {% endif %}
+        {% set totalAuthors = totalAuthors + 1 %}
+<p><a href="{{ path('details', {'id': a.id}) }}">details</a></p>
+    {% endfor %}
+{% else %}
+    <p>Aucun auteur disponible.</p>
+{% endif %}
+
+<p>Nombre total d'auteurs : {{ totalAuthors }}</p>
+<p>Nombre total de livres de tous les auteurs : {{ totalBooks }}</p>
+
+{{ dump(authors) }}
