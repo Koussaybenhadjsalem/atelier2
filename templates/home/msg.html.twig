@@ -1,0 +1,9 @@
+{% for a in authors %}
+{{a.username}}
+{% if a.nb_books>0 %}
+<img src="{{a.picture}}" alt="">
+<input type="submit" value="buy">
+{%endif%}
+<a href="{{ path('details',{'id' :a.username}) }}">details</a>
+{% endfor %}
+{{dump(authors)}}
